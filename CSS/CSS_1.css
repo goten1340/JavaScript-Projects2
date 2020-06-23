@@ -1,0 +1,14 @@
+input {
+    background-color: darkkhaki;
+    size: 6pt;
+    margin: 13px;
+    font-variant: normal;
+    font-style: italic;
+}
+label {
+    margin:  10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border: plum;
+    border-radius: 29px;
+    size: 3ch;
+}
