@@ -7,7 +7,7 @@ First_Operand:null,
 // this checks whether or not the second operand has been input
 wait_Second_Operand:false,
 // this will hold the operator, we set it to null for now
-operator:null
+operator:null,
 };
 
 //this modifies values each time a button is clicked
@@ -56,19 +56,19 @@ operator:null
             //if operator already exists, property lookup is performed for the operator
             //in the perform_Calculations object and the function that matches the
             //operator is executed
-            const result=Perform_Calculation[operator] (Value_Now, Value_of_input);
+            const result=Perform_Calculation[operator] (Value_Now, Value_of_Input);
 
             Calculator.Display_Value=String(result);
             Calculator.First_Operand=result;
         }
 
-        Calculator.wait_Second_Operand=true;
+        Calculator.Wait_Second_Operand=true;
         Calculator.operator=Next_Operator;
 
     }
 
     const Perform_Calculation={
-        '/': (First_Operand,Wait_Second_Operand)=> First_Operand/Wait_Second_Operand,
+        '/': (First_Operand, Second_Operand)=> First_Operand/Second_Operand,
 
         '*': (First_Operand, Second_Operand) => First_Operand * Second_Operand,
 
@@ -87,7 +87,7 @@ operator:null
     }
     // this function updates the screen with the contents of Display_value
     function Update_Display() {
-        const display=document.querySelector('calculator-screen');
+        const display=document.querySelector('.calculator-screen');
         display.value= Calculator.Display_Value;
     }
 
@@ -103,6 +103,12 @@ operator:null
             return;
         }
 
+        if (target.classList.contains('operator')) {
+            Handle_Operator(target.value);
+            Update_Display();
+            return;
+        }
+
         if (target.classList.contains('decimal')) {
         Input_Decimal(target.value);
         Update_Display();
@@ -114,9 +120,9 @@ operator:null
         if (target.classList.contains('all-clear')) {
             Calculator_Reset();
             Update_Display();
-            return
+            return;
         }
         
         Input_Digit(target.value);
         Update_Display();
-    });
+    })
